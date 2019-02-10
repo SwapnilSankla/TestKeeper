@@ -5,7 +5,7 @@ Sometimes such code has tests, sometimes it doesn't. However it is also a common
 
 *If you are working on codebase then please read ahead.*
 
-* Fixing the failing or unmaintained test in one go is not practical. However you would still need a control that at least going forward 
+* Fixing the failing or unmaintained tests in one go is not practical. However you would still need a control that at least going forward 
 we should not add failing any test and also not break the tests which were passing earlier.
 * So basically we need a threshold mechanism where you specify the maximum test which are allowed to fail/skip, if threshold is exceeded
 then build should fail otherwise it should go through.
