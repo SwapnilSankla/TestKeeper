@@ -1,5 +1,7 @@
 # Test Threshold Checker
 
+[![Build Status](https://travis-ci.org/SwapnilSankla/TestThresholdChecker.svg?branch=master)](https://travis-ci.org/SwapnilSankla/TestThresholdChecker)
+
 There are many occasions when we are supposed to do development on top of the code written by someone else. 
 Sometimes such code has tests, sometimes it doesn't. However it is also a common scenario when tests are written but not maintained.
 
