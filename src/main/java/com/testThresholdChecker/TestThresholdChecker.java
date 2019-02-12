@@ -2,41 +2,46 @@ package com.testThresholdChecker;
 
 import com.testThresholdChecker.mapper.FileToTestSuiteMapper;
 import com.testThresholdChecker.model.TestSuite;
+import com.testThresholdChecker.model.ThresholdCheckerConfiguration;
+import com.testThresholdChecker.model.ThresholdCheckerConfiguration.ThresholdCheckerConfigurationBuilder;
 import com.testThresholdChecker.model.XmlReportFile;
 
 import java.io.File;
 import java.util.List;
 import java.util.Optional;
-import java.util.Properties;
 import java.util.function.Function;
 
-import static java.lang.Integer.parseInt;
-
 public class TestThresholdChecker {
-  public static void main(String[] args) throws FailingTestsThresholdExceededException, SkippedTestsThresholdExceededException, InvalidXmlReportDirectoryException {
-    new TestThresholdChecker().throwExceptionIfThresholdsAreCrossed(new XmlReportFile(args[0]).getTestReports());
+  public static void main(String[] args) throws FailingTestsThresholdExceededException,
+      SkippedTestsThresholdExceededException,
+      InvalidXmlReportDirectoryException,
+      InvalidArgumentsException {
+    String argument = args != null && args.length > 0 ? args[0] : "";
+    ThresholdCheckerConfiguration thresholdCheckerConfiguration = new ThresholdCheckerConfigurationBuilder().with
+        (argument).build();
+    new TestThresholdChecker().throwExceptionIfThresholdsAreCrossed(thresholdCheckerConfiguration);
   }
 
-  private void throwExceptionIfThresholdsAreCrossed(List<File> xmlReports) throws FailingTestsThresholdExceededException, SkippedTestsThresholdExceededException {
-    Properties properties = new Configuration().get();
-    throwExceptionIfFailingTestsCrossesThreshold(xmlReports, properties);
-    throwExceptionIfSkippedTestsCrossesThreshold(xmlReports, properties);
+  private void throwExceptionIfThresholdsAreCrossed(ThresholdCheckerConfiguration thresholdCheckerConfiguration) throws
+      FailingTestsThresholdExceededException, SkippedTestsThresholdExceededException, InvalidXmlReportDirectoryException {
+    List<File> xmlReports = new XmlReportFile(thresholdCheckerConfiguration.getPath()).getTestReports();
+    throwExceptionIfFailingTestsCrossesThreshold(xmlReports, thresholdCheckerConfiguration.getMaxNumberAllowedFailingTests());
+    throwExceptionIfSkippedTestsCrossesThreshold(xmlReports, thresholdCheckerConfiguration.getMaxNumberAllowedSkippedTests());
   }
 
-  private void throwExceptionIfFailingTestsCrossesThreshold(List<File> xmlReports, Properties properties) throws FailingTestsThresholdExceededException {
+  private void throwExceptionIfFailingTestsCrossesThreshold(List<File> xmlReports, int maxNumberAllowedFailingTests) throws
+      FailingTestsThresholdExceededException {
     Integer numberFailingOfTests = getCount(xmlReports, TestSuite::getNumberOfFailingTests);
 
-    int maxNumberAllowedFailingTests = parseInt(properties.getProperty("MAX_NUMBER_ALLOWED_FAILING_TESTS"));
     if (numberFailingOfTests > maxNumberAllowedFailingTests) {
       throw new FailingTestsThresholdExceededException(formatExceptionMessage
           (FailingTestsThresholdExceededException.class, maxNumberAllowedFailingTests, numberFailingOfTests));
     }
   }
 
-  private void throwExceptionIfSkippedTestsCrossesThreshold(List<File> xmlReports, Properties properties) throws SkippedTestsThresholdExceededException {
+  private void throwExceptionIfSkippedTestsCrossesThreshold(List<File> xmlReports, int maxNumberAllowedSkippedTests) throws SkippedTestsThresholdExceededException {
     Integer numberOfSkippedTests = getCount(xmlReports, TestSuite::getNumberOfSkippedTests);
 
-    int maxNumberAllowedSkippedTests = parseInt(properties.getProperty("MAX_NUMBER_ALLOWED_SKIPPED_TESTS"));
     if (numberOfSkippedTests > maxNumberAllowedSkippedTests) {
       throw new SkippedTestsThresholdExceededException(formatExceptionMessage
           (SkippedTestsThresholdExceededException.class, numberOfSkippedTests, maxNumberAllowedSkippedTests));

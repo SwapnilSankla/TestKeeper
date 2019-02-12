@@ -1,2 +1,3 @@
 #!/usr/bin/env bash
-mvn exec:java -Dexec.args="target/surefire-reports"
+mvn exec:java -Dexec.args="'$*'"
+
