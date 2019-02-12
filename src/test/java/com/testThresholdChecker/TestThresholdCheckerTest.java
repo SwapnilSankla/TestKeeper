@@ -27,13 +27,23 @@ public class TestThresholdCheckerTest {
   @Test(expected = InvalidXmlReportDirectoryException.class)
   public void main_throwsInvalidXmlReportDirectoryException_forInvalidDirectory() throws
       FailingTestsThresholdExceededException, SkippedTestsThresholdExceededException, InvalidXmlReportDirectoryException, InvalidArgumentsException {
-    String[] args = { "" };
+    String[] args = { "ppp" };
     TestThresholdChecker.main(args);
   }
 
-  @Test(expected = InvalidArgumentsException.class)
-  public void main_throwsInvalidArgumentsException_onEmptyArgs() throws
-      FailingTestsThresholdExceededException, SkippedTestsThresholdExceededException, InvalidXmlReportDirectoryException, InvalidArgumentsException {
-    TestThresholdChecker.main(new String[0]);
+  @Test(expected = FailingTestsThresholdExceededException.class)
+  public void main_throwsFailingTestsException_forGivenThreshold() throws
+      FailingTestsThresholdExceededException, SkippedTestsThresholdExceededException,
+      InvalidXmlReportDirectoryException, InvalidArgumentsException {
+    String[] args = { "src/test/resources/surefire-dummy-reports/happy 0"};
+    TestThresholdChecker.main(args);
+  }
+
+  @Test(expected = SkippedTestsThresholdExceededException.class)
+  public void main_throwsSkippedTestsTestsException_forGivenThreshold() throws
+      FailingTestsThresholdExceededException, SkippedTestsThresholdExceededException,
+      InvalidXmlReportDirectoryException, InvalidArgumentsException {
+    String[] args = { "src/test/resources/surefire-dummy-reports/happy 5 0" };
+    TestThresholdChecker.main(args);
   }
 }
