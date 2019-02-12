@@ -13,7 +13,13 @@ import java.util.function.Function;
 import static java.lang.Integer.parseInt;
 
 public class TestThresholdChecker {
-  public static void main(String[] args) throws FailingTestsThresholdExceededException, SkippedTestsThresholdExceededException, InvalidXmlReportDirectoryException {
+  public static void main(String[] args) throws FailingTestsThresholdExceededException,
+      SkippedTestsThresholdExceededException,
+      InvalidXmlReportDirectoryException,
+      InvalidArgumentsException {
+    if(args.length == 0) {
+      throw new InvalidArgumentsException("");
+    }
     new TestThresholdChecker().throwExceptionIfThresholdsAreCrossed(new XmlReportFile(args[0]).getTestReports());
   }
 
