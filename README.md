@@ -17,6 +17,14 @@ generated. It is built with Maven support.
 
 Currently the thresholds are specified as application configuratoin however going forward these can be stored as environment variables
 
-Run `validateTestReports.sh` script under scripts folder with path of the surefire-reports and that's it!
+Run `validateTestReports.sh` script under scripts folder as below.
+
+`validateTestReports.sh <SurefireReportDirectoryPath> <MaxNumberOfAllowedFailingTests> <MaxNumberOfAllowedSkippedTests`
+
+Parameter                      | Default Value            | Mandatory 
+-------------------------------|--------------------------|------------
+Path                           | /target/surefire-reports | false
+MaxNumberOfAllowedFailingTests | 0                        | false
+MaxNumberOfAllowedSkippedTests | 0                        | false
 
 
