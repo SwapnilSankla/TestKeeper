@@ -1,7 +1,6 @@
 package com.testThresholdChecker.model;
 
 import com.testThresholdChecker.Configuration;
-import com.testThresholdChecker.InvalidArgumentsException;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Value;
@@ -24,7 +23,7 @@ public class ThresholdCheckerConfiguration {
     private Optional<Integer> maxNumberAllowedFailingTests = Optional.empty();
     private Optional<Integer> maxNumberAllowedSkippedTests = Optional.empty();
 
-    public ThresholdCheckerConfigurationBuilder with(String argument) throws InvalidArgumentsException {
+    public ThresholdCheckerConfigurationBuilder with(String argument) {
       if(argument.isEmpty()) {
         return this;
       }
@@ -37,7 +36,6 @@ public class ThresholdCheckerConfiguration {
         }
       }
       return this;
-
     }
 
     public ThresholdCheckerConfiguration build() {

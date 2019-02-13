@@ -11,14 +11,14 @@ public class TestThresholdCheckerTest {
 
   @Test
   public void main_noExceptionIsThrown_whenThresholdsAreMet() throws FailingTestsThresholdExceededException,
-      SkippedTestsThresholdExceededException, InvalidXmlReportDirectoryException, InvalidArgumentsException {
+      SkippedTestsThresholdExceededException, InvalidXmlReportDirectoryException {
     String[] args = { "src/test/resources/surefire-dummy-reports/happy" };
     TestThresholdChecker.main(args);
   }
 
   @Test
   public void main_throwsFailingTestsThresholdExceededException_forExceedingFailingThreshold() throws
-      InvalidXmlReportDirectoryException, InvalidArgumentsException, FailingTestsThresholdExceededException, SkippedTestsThresholdExceededException {
+      InvalidXmlReportDirectoryException, FailingTestsThresholdExceededException, SkippedTestsThresholdExceededException {
     String[] args = { "src/test/resources/surefire-dummy-reports/failing" };
     expectedException.expect(FailingTestsThresholdExceededException.class);
     expectedException.expectMessage("com.testThresholdChecker.FailingTestsThresholdExceededException: Limit is 1 current count is 2");
@@ -27,7 +27,7 @@ public class TestThresholdCheckerTest {
 
   @Test
   public void main_throwsSkippedTestsThresholdExceededException_forExceedingFailingThreshold() throws
-      FailingTestsThresholdExceededException, SkippedTestsThresholdExceededException, InvalidXmlReportDirectoryException, InvalidArgumentsException {
+      FailingTestsThresholdExceededException, SkippedTestsThresholdExceededException, InvalidXmlReportDirectoryException {
     String[] args = { "src/test/resources/surefire-dummy-reports/skipped" };
     expectedException.expect(SkippedTestsThresholdExceededException.class);
     expectedException.expectMessage("com.testThresholdChecker.SkippedTestsThresholdExceededException: Limit is 1 current count is 2");
@@ -36,7 +36,7 @@ public class TestThresholdCheckerTest {
 
   @Test(expected = InvalidXmlReportDirectoryException.class)
   public void main_throwsInvalidXmlReportDirectoryException_forInvalidDirectory() throws
-      FailingTestsThresholdExceededException, SkippedTestsThresholdExceededException, InvalidXmlReportDirectoryException, InvalidArgumentsException {
+      FailingTestsThresholdExceededException, SkippedTestsThresholdExceededException, InvalidXmlReportDirectoryException {
     String[] args = { "ppp" };
     TestThresholdChecker.main(args);
   }
@@ -44,7 +44,7 @@ public class TestThresholdCheckerTest {
   @Test
   public void main_throwsFailingTestsException_forGivenThreshold() throws
       FailingTestsThresholdExceededException, SkippedTestsThresholdExceededException,
-      InvalidXmlReportDirectoryException, InvalidArgumentsException {
+      InvalidXmlReportDirectoryException {
     String[] args = { "src/test/resources/surefire-dummy-reports/happy 0"};
     expectedException.expect(FailingTestsThresholdExceededException.class);
     expectedException.expectMessage("com.testThresholdChecker.FailingTestsThresholdExceededException: Limit is 0 " +
@@ -55,7 +55,7 @@ public class TestThresholdCheckerTest {
   @Test
   public void main_throwsSkippedTestsTestsException_forGivenThreshold() throws
       FailingTestsThresholdExceededException, SkippedTestsThresholdExceededException,
-      InvalidXmlReportDirectoryException, InvalidArgumentsException {
+      InvalidXmlReportDirectoryException {
     String[] args = { "src/test/resources/surefire-dummy-reports/happy 5 0" };
     expectedException.expect(SkippedTestsThresholdExceededException.class);
     expectedException.expectMessage("com.testThresholdChecker.SkippedTestsThresholdExceededException: Limit is 0 " +

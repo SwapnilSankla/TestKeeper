@@ -14,8 +14,7 @@ import java.util.function.Function;
 public class TestThresholdChecker {
   public static void main(String[] args) throws FailingTestsThresholdExceededException,
       SkippedTestsThresholdExceededException,
-      InvalidXmlReportDirectoryException,
-      InvalidArgumentsException {
+      InvalidXmlReportDirectoryException {
     String argument = args != null && args.length > 0 ? args[0] : "";
     ThresholdCheckerConfiguration thresholdCheckerConfiguration = new ThresholdCheckerConfigurationBuilder().with
         (argument).build();
