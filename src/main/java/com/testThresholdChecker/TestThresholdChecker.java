@@ -44,7 +44,7 @@ public class TestThresholdChecker {
 
     if (numberOfSkippedTests > maxNumberAllowedSkippedTests) {
       throw new SkippedTestsThresholdExceededException(formatExceptionMessage
-          (SkippedTestsThresholdExceededException.class, numberOfSkippedTests, maxNumberAllowedSkippedTests));
+          (SkippedTestsThresholdExceededException.class, maxNumberAllowedSkippedTests, numberOfSkippedTests));
     }
   }
 
