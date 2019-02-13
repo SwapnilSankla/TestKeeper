@@ -1,4 +1,4 @@
-# Test Threshold Checker
+# TestKeeper
 
 [![Build Status](https://travis-ci.org/SwapnilSankla/TestThresholdChecker.svg?branch=master)](https://travis-ci.org/SwapnilSankla/TestThresholdChecker)
 

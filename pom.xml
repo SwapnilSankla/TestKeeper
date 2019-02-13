@@ -23,9 +23,9 @@
         </plugins>
     </build>
 
-    <groupId>TestThresholdChecker</groupId>
-    <artifactId>TestThresholdChecker</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <groupId>org.test</groupId>
+    <artifactId>testKeeper</artifactId>
+    <version>1.0.0</version>
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
