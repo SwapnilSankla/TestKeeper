@@ -19,7 +19,7 @@ Currently the thresholds are specified as application configuratoin however goin
 
 Run `validateTestReports.sh` script under scripts folder as below.
 
-`validateTestReports.sh <SurefireReportDirectoryPath> <MaxNoOfAllowedFailingTests> <MaxNoOfAllowedSkippedTests`
+`validateTestReports.sh <SurefireReportDirectoryPath> <MaxAllowedFailingTests> <MaxAllowedSkippedTests>`
 
 Parameter                      | Default Value            | Mandatory 
 -------------------------------|--------------------------|------------
