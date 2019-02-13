@@ -21,10 +21,10 @@ Run `validateTestReports.sh` script under scripts folder as below.
 
 `validateTestReports.sh <SurefireReportDirectoryPath> <MaxAllowedFailingTests> <MaxAllowedSkippedTests>`
 
-Parameter                      | Default Value            | Mandatory 
--------------------------------|--------------------------|------------
-Path                           | /target/surefire-reports | false
-MaxNumberOfAllowedFailingTests | 0                        | false
-MaxNumberOfAllowedSkippedTests | 0                        | false
+Parameter              | Default Value            | Mandatory 
+-----------------------|--------------------------|------------
+Path                   | /target/surefire-reports | false
+MaxAllowedFailingTests | 0                        | false
+MaxAllowedSkippedTests | 0                        | false
 
 
