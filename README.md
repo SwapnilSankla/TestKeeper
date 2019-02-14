@@ -24,4 +24,5 @@ Path                   | /target/surefire-reports | false
 MaxAllowedFailingTests | 0                        | false
 MaxAllowedSkippedTests | 0                        | false
 
+End goal is to release as a maven plugin.
 
